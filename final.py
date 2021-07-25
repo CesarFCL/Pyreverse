@@ -1,12 +1,16 @@
 """
 Scrapping Version 3.0
 """
+import sys
+import shlex
+import subprocess
 from wordcloud import WordCloud
 from matplotlib import pyplot as plt
+from matplotlib import image as mpimg
 from bs4 import BeautifulSoup
 import requests
 
-class Usuario:
+class Usuario: # pylint: disable=too-few-public-methods
     """ID del usuario para su busqueda"""
     def __init__(self, id_user):
         self.id_user=id_user
@@ -79,3 +83,11 @@ IDusuario= input()
 user_=Usuario(IDusuario)
 Nube=WC(user_)
 Nube.mostrar_wc()
+
+#Pyreverse UML
+args = shlex.split('-o png -p ScrappingProject '+sys.argv[0])
+subprocess.call(['pyreverse'] + args)
+img = mpimg.imread('classes_ScrappingProject.png')
+imgplot = plt.imshow(img)
+plt.title("Grafico UML")
+plt.show()
